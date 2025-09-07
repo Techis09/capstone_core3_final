@@ -360,7 +360,7 @@ $activityResult = $conn->query("SELECT * FROM admin_activity ORDER BY date DESC 
 <body>
   <div class="sidebar" id="sidebar">
     <div class="logo">
-      <img src="rem.png" alt="SLATE Logo">
+      <img src="slate_logo-removebg-preview.png" alt="SLATE Logo">
     </div>
     <div class="system-name">CORE TRANSACTION 3</div>
     <a href="admin.php" class="active">Dashboard</a>

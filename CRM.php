@@ -277,7 +277,7 @@ include("darkmode.php"); // for darkmode functionality
 <body>
     <div class="sidebar" id="sidebar">
         <div class="logo">
-            <img src="rem.png" alt="SLATE Logo">
+            <img src="slate_logo-removebg-preview.png" alt="SLATE Logo">
         </div>
         <h4 class="mb-3" style="text-align: center;">CORE TRANSACTION 3</h4>
         <a href="admin.php"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
@@ -371,7 +371,9 @@ include("darkmode.php"); // for darkmode functionality
                         <p id="viewEmail"></p>
                         <p id="viewRole"></p>
                         <p id="viewJoined"></p>
-                        <img id="viewProfile" src="" width="100" class="img-thumbnail">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img id="viewProfile" src="" width="100" class="img-thumbnail">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -105,7 +105,7 @@ $profileImage = (!empty($row['profile_image'])) ? $row['profile_image'] : 'defau
     <a href="user-acct.php">🏠 Dashboard</a>
     <a href="user-shipment.php">📦 Track Shipment</a>
     <a href="user-book-shipment.php" class="active">📝 Book Shipment</a>
-    <a href="user-shipment-history.php">📜 Shipment History</a>
+    <a href="user-ship-history.php">📜 Shipment History</a>
   </div>
 
   <!-- Main content -->

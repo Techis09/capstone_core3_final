@@ -2,16 +2,17 @@
 include('session.php');
 include('connection.php'); // Make sure DB connection is available
 
-// Fetch the latest profile image from accounts table
+// Fetch full user data
 $username = $_SESSION['username'];
-$sql = "SELECT profile_image FROM accounts WHERE username = '$username'";
+$sql = "SELECT * FROM accounts WHERE username = '$username'";
 $result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
+$user = mysqli_fetch_assoc($result);
 
-// Use database value, fallback to default if empty
-$profileImage = (!empty($row['profile_image']) && file_exists($row['profile_image']))
-    ? $row['profile_image']
-    : 'default-avatar.png';
+// Profile image fallback
+$profileImage = (!empty($user['profile_image']) && file_exists($user['profile_image']))
+  ? $user['profile_image']
+  : 'default-avatar.png';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +92,7 @@ $profileImage = (!empty($row['profile_image']) && file_exists($row['profile_imag
   <!-- Sidebar -->
   <div class="sidebar d-flex flex-column">
     <div class="text-center mb-4">
-      <img src="slate.png" alt="Freight Logo" class="img-fluid mb-2" style="max-width:120px;">
+      <img src="slate_logo-removebg-preview.png" alt="Freight Logo" class="img-fluid mb-2" style="max-width:120px;">
       <h5>Freight System</h5>
     </div>
     <a href="user-acct.php" class="active">🏠 Dashboard</a>
@@ -115,12 +116,9 @@ $profileImage = (!empty($row['profile_image']) && file_exists($row['profile_imag
 
         <!-- Profile Picture Dropdown -->
         <div class="dropdown">
-          <img src="<?php echo $profileImage; ?>" alt="Profile"
-            class="rounded-circle"
+          <img src="<?php echo $profileImage; ?>" alt="Profile" class="rounded-circle"
             style="width:55px; height:55px; object-fit:cover; border:2px solid #0d6efd; cursor:pointer;"
-            id="profileDropdown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false">
+            id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item" href="user-profile.php">👤 Profile</a></li>
             <li><a class="dropdown-item" href="logout.php">🚪 Logout</a></li>
@@ -130,48 +128,77 @@ $profileImage = (!empty($row['profile_image']) && file_exists($row['profile_imag
     </div>
 
     <!-- Dashboard Cards -->
-    <div class="row g-3 mb-4">
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h5>Total Shipments</h5>
-          <h2>12</h2>
-        </div>
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Customer Portal & Notification Hub</h2>
+
       </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h5>In Transit</h5>
-          <h2>3</h2>
+
+      <div class="row g-4">
+        <!-- Notifications -->
+        <div class="col-md-6">
+          <div class="card card-custom p-3">
+            <h5>Notifications</h5>
+            <input type="text" class="form-control mb-2" placeholder="Search Notifications...">
+            <div class="d-flex gap-2 mb-3">
+              <button class="btn btn-sm btn-outline-light">Unread</button>
+              <button class="btn btn-sm btn-outline-light">Read</button>
+              <button class="btn btn-sm btn-outline-light">Mark as Read</button>
+              <button class="btn btn-sm btn-outline-light">Archive</button>
+            </div>
+
+            <div class="notification-item">
+              <strong>System Update</strong> <span class="badge bg-secondary">Medium</span>
+              <div class="small">2 hours ago</div>
+            </div>
+            <div class="notification-item">
+              <strong>SLA Alert</strong> <span class="badge bg-danger">High</span>
+              <div class="small">Yesterday</div>
+            </div>
+            <div class="notification-item">
+              <strong>Document Reminder</strong> <span class="badge bg-success">Low</span>
+              <div class="small">2 days ago</div>
+            </div>
+
+            <h6 class="mt-3">Current Placements</h6>
+            <div class="notification-item">
+              <strong>My Documents</strong> <br>
+              <span class="small">Compliance Cert will expire in 5 days</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h5>Delivered</h5>
-          <h2>8</h2>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h5>Pending</h5>
-          <h2>1</h2>
+
+        <!-- Profile Overview -->
+        <div class="col-md-6">
+          <div class="card card-custom p-3">
+            <h5>Customer Portal</h5>
+            <div class="mb-3">
+              <strong>Profile Overview</strong><br>
+              <?php echo htmlspecialchars($user['username'] ?? 'Not Set'); ?> <br>
+              <?php echo htmlspecialchars($user['email'] ?? 'Not Set'); ?> <br>
+              <?php echo htmlspecialchars($user['role'] ?? 'Not Set'); ?> <br>
+              <?php echo htmlspecialchars($user['created_at'] ?? 'Not Set'); ?>
+            </div>
+
+            <h6>Contracts & SLA Snapshot</h6>
+            <ul>
+              <li><span class="text-success">●</span> Active</li>
+              <li><span class="text-warning">●</span> Expiring Soon</li>
+              <li><span class="text-danger">●</span> Breach Alert</li>
+            </ul>
+
+            <h6>Documents & Compliance</h6>
+            <button class="btn btn-sm btn-outline-light">My Documents</button>
+
+            <h6 class="mt-3">Shipments</h6>
+            <p>Active Shipments: 2</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Charts -->
-    <div class="row g-3 mb-4">
-      <div class="col-md-4 d-flex">
-      <div class="card p-3 flex-fill">
-        <h5>📊 Shipment Trends</h5>
-        <canvas id="shipmentTrends" style="height:300px;"></canvas>
-      </div>
-      </div>
-      <div class="col-md-4 d-flex">
-      <div class="card p-3 flex-fill">
-        <h5>🚛 Status Breakdown</h5>
-        <canvas id="statusBreakdown" style="height:300px;"></canvas>
-      </div>
-      </div>
-    </div>
+
 
     <!-- Recent Shipments Table -->
     <div class="card p-3">
@@ -213,36 +240,12 @@ $profileImage = (!empty($row['profile_image']) && file_exists($row['profile_imag
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     // Dark Mode
-    document.getElementById("theme-toggle").addEventListener("change", function() {
+    document.getElementById("theme-toggle").addEventListener("change", function () {
       document.body.classList.toggle("dark-mode");
     });
 
-    // Charts Example
-    const ctx1 = document.getElementById('shipmentTrends').getContext('2d');
-    new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: ['Aug 25', 'Aug 26', 'Aug 27', 'Aug 28', 'Aug 29'],
-        datasets: [{
-          label: 'Shipments',
-          data: [2, 5, 3, 6, 4],
-          borderColor: '#0d6efd',
-          fill: false
-        }]
-      }
-    });
 
-    const ctx2 = document.getElementById('statusBreakdown').getContext('2d');
-    new Chart(ctx2, {
-      type: 'pie',
-      data: {
-        labels: ['In Transit', 'Delivered', 'Pending'],
-        datasets: [{
-          data: [3, 8, 1],
-          backgroundColor: ['#ffc107', '#198754', '#0dcaf0']
-        }]
-      }
-    });
   </script>
 </body>
+
 </html>

@@ -187,9 +187,10 @@ include("darkmode.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | CORE3 Customer Relationship & Business Control</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+=======
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <style>
@@ -585,6 +586,7 @@ include("darkmode.php");
 </head>
 
 <body>
+<<<<<<< HEAD
      <div class="sidebar" id="sidebar">
         <div class="logo">
             <img src="rem.png" alt="SLATE Logo">
@@ -597,6 +599,20 @@ include("darkmode.php");
         <a href="BIFA.php"><i class="bi bi-graph-up me-2"></i> BI & Freight</a>
         <a href="CPN.php"><i class="bi bi-globe me-2"></i> Customer Portal</a>
         <a href="logout.php"><i class="bi bi-box-arrow-right me-2"></i> Logout</a>
+=======
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="rem.png" alt="SLATE Logo">
+        </div>
+        <div class="system-name">CORE TRANSACTION 3</div>
+        <a href="admin.php">Dashboard</a>
+        <a href="CRM.php">Customer Relationship Management</a>
+        <a href="CSM.php" class="active">Contract & SLA Monitoring</a>
+        <a href="E-Doc.php">E-Documentations & Compliance Manager</a>
+        <a href="BIFA.php">Business Intelligence & Freight Analytics</a>
+        <a href="CPN.php">Customer Portal & Notification Hub</a>
+        <a href="logout.php">Logout</a>
+>>>>>>> e238c75ad894477ef2f048961a8b2793b254eae2
     </div>
 
     <div class="content" id="mainContent">

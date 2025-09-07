@@ -100,7 +100,7 @@
     <!-- Sidebar -->
     <div class="sidebar d-flex flex-column">
       <div class="text-center mb-4">
-        <img src="logo.png" alt="Freight Logo" class="img-fluid mb-2" style="max-width:120px;">
+        <img src="slate_logo-removebg-preview.png" alt="Freight Logo" class="img-fluid mb-2" style="max-width:120px;">
         <h5>Freight System</h5>
       </div>
       <a href="user-acct.php">🏠 Dashboard</a>

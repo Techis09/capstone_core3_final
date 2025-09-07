@@ -564,7 +564,7 @@ if (isset($_GET['delete'])) {
 <body>
     <div class="sidebar" id="sidebar">
         <div class="logo">
-            <img src="rem.png" alt="SLATE Logo">
+            <img src="slate_logo-removebg-preview.png" alt="SLATE Logo">
         </div>
         <h4 class="mb-3" style="text-align: center;">CORE TRANSACTION 3</h4>
         <a href="admin.php"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
